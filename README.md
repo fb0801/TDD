@@ -14,6 +14,8 @@ Project to learn TDD with python
 
 -AttributeError: 'WebDriver' object has no attribute 'find_element_by_tag_name' -> need to change to find_element(By.TAG_NAME,'h1').text as 'find_element_by_tag_name' no longer works
 
+- ran into git issues resulting in some repo loss
+
 # Resouces used:
 
 http://www.obeythetestinggoat.com/
@@ -57,3 +59,7 @@ https://stackoverflow.com/questions/25964312/not-null-constraint-failed-after-ad
 https://12factor.net/
 
 https://hynek.me/talks/python-deployments/
+
+https://www.git-tower.com/learn/git/faq/track-remote-upstream-branch
+
+https://www.git-tower.com/learn/git/faq/git-rename-master-to-main
