@@ -63,3 +63,5 @@ https://hynek.me/talks/python-deployments/
 https://www.git-tower.com/learn/git/faq/track-remote-upstream-branch
 
 https://www.git-tower.com/learn/git/faq/git-rename-master-to-main
+
+https://www.selenium.dev/documentation/webdriver/elements/finders/
