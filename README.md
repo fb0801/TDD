@@ -20,6 +20,8 @@ Project to learn TDD with python
 
 http://www.obeythetestinggoat.com/
 
+original repo -> https://github.com/hjwp/book-example
+
 https://www.browserstack.com/guide/geckodriver-selenium-python
 
 https://www.obeythetestinggoat.com/book/pre-requisite-installations.html
