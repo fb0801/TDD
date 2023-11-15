@@ -4,7 +4,10 @@
         {% extends 'base.html' %}
         {% block header_text %}Start a new To-Do list{% endblock %}
 
-        {% block form_action %}/lists/new{% endblock %}
+       
+        {% block form_action %}/lists/{{ list.id }}/{% endblock %}
+
+
     </head>
     <body>
         <h1>Start a new To-Do list</h1>
