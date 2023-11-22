@@ -20,7 +20,7 @@ class FunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    """def wait_for_row_in_list_table(self, row_text):
+    def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
             try:
@@ -31,14 +31,14 @@ class FunctionalTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
-                time.sleep(0.5)"""
+                time.sleep(0.5)
 
     def wait_for(self, fn):
         start_time = time.time()
         while True:
             try:
                 
-                return fn
+                return fn()
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
