@@ -16,6 +16,8 @@ Project to learn TDD with python
 
 - ran into git issues resulting in some repo loss
 
+- No module named 'django.core.urlresolvers' -> resoloved using from django.urls import reverse
+
 # Resouces used:
 
 http://www.obeythetestinggoat.com/
@@ -67,3 +69,5 @@ https://www.git-tower.com/learn/git/faq/track-remote-upstream-branch
 https://www.git-tower.com/learn/git/faq/git-rename-master-to-main
 
 https://www.selenium.dev/documentation/webdriver/elements/finders/
+
+https://stackoverflow.com/questions/43139081/importerror-no-module-named-django-core-urlresolvers
