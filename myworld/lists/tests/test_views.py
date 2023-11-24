@@ -1,4 +1,4 @@
-
+from lists.forms import ItemForm
 from lists.models import Item, List
 from django.test import TestCase
 from django.utils.html import escape
@@ -85,7 +85,14 @@ class NewListTest(TestCase):
         self.assertEqual(Item.objects.count(), 0)
 
 
+class HomePageTest(TestCase):
 
+    def test_uses_home_template(self):
+        [...]
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm) 
 
 
 
