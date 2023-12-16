@@ -6,7 +6,6 @@ from lists.forms import ItemForm
 
 
 def home_page(request):
-    
     return render(request, 'home.html', {'form': ItemForm()})
 
 

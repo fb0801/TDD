@@ -9,6 +9,17 @@ from lists.forms import ItemForm, EMPTY_ITEM_ERROR
 from django.http import HttpRequest  
 from lists.views import home_page
 
+
+class HomePageTest(TestCase):
+
+    def test_uses_home_template(self):
+        response = self.client.get("/")
+        self.assertTemplateUsed(response, "home.html")
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm) 
+
 class ListViewTest(TestCase):
     
     def test_uses_list_template(self):
@@ -44,8 +55,8 @@ class ListViewTest(TestCase):
 
         self.client.post(
             f'/lists/{correct_list.id}/',
-            data={'item_text': 'A new item for an existing list'}
-        )
+            data={'text': 'A new item for an existing list'}
+        )#item_text
 
         self.assertEqual(Item.objects.count(), 1)
         new_item = Item.objects.first()
@@ -59,8 +70,8 @@ class ListViewTest(TestCase):
 
         response = self.client.post(
             f'/lists/{correct_list.id}/',
-            data={'item_text': 'A new item for an existing list'}
-        )
+            data={'text': 'A new item for an existing list'}
+        )#
         self.assertRedirects(response, f'/lists/{correct_list.id}/')
 
     def post_invalid_input(self):
@@ -125,15 +136,7 @@ class NewListTest(TestCase):
         self.assertIsInstance(response.context['form'], ItemForm)
 
 
-class HomePageTest(TestCase):
 
-    def test_uses_home_template(self):
-        response = self.client.get("/")
-        self.assertTemplateUsed(response, "home.html")
-
-    def test_home_page_uses_item_form(self):
-        response = self.client.get('/')
-        self.assertIsInstance(response.context['form'], ItemForm) 
 
 
 
