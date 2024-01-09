@@ -16,7 +16,7 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, 'home.html')
 
 class NewListTest(TestCase):
-#
+#ck
     def test_can_save_a_POST_request(self):
         self.client.post("/lists/new", data={"text": "A new list item"})#item_text
         self.assertEqual(Item.objects.count(), 1)
