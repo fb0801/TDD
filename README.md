@@ -71,3 +71,5 @@ https://www.git-tower.com/learn/git/faq/git-rename-master-to-main
 https://www.selenium.dev/documentation/webdriver/elements/finders/
 
 https://stackoverflow.com/questions/43139081/importerror-no-module-named-django-core-urlresolvers
+
+https://www.selenium.dev/documentation/webdriver/elements/locators/#css-selector
