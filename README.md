@@ -77,3 +77,5 @@ https://www.selenium.dev/documentation/webdriver/elements/locators/#css-selector
 https://qunitjs.com/intro/
 
 https://releases.jquery.com/qunit/
+
+https://jquery.com/download/
