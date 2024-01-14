@@ -73,3 +73,7 @@ https://www.selenium.dev/documentation/webdriver/elements/finders/
 https://stackoverflow.com/questions/43139081/importerror-no-module-named-django-core-urlresolvers
 
 https://www.selenium.dev/documentation/webdriver/elements/locators/#css-selector
+
+https://qunitjs.com/intro/
+
+https://releases.jquery.com/qunit/
