@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.urls import re_path
 
-from django.conf.urls import include,url
+from django.conf.urls import include
 from lists import views as list_views  
 from lists import urls as list_urls  
 
