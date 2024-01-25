@@ -79,3 +79,9 @@ https://qunitjs.com/intro/
 https://releases.jquery.com/qunit/
 
 https://jquery.com/download/
+
+https://pypi.org/project/python-dotenv/
+
+https://www.runthat.blog/how-to-create-and-use-env-files-in-python/
+
+https://ioflood.com/blog/python-dotenv-guide-how-to-use-environment-variables-in-python/
