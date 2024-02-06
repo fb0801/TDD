@@ -14,4 +14,7 @@ class PasswordlessAuthenticationBackend(object):
             return None
 
     def get_user(self, email):
-        return User.objects.first()
+        try:
+            return User.objects.get(email=email)
+        except User.DoesNotExist:
+            return None  
