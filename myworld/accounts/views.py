@@ -4,15 +4,12 @@ from django.contrib import messages
 from accounts.models import Token
 from django.urls import reverse
 import sys
-from django.contrib import auth
+
 from django.contrib.auth import authenticate, login
+from django.contrib import auth, messages
 
 def login(request):
-    print('login view', file=sys.stderr)
-    uid = request.GET.get('uid')
-    user = auth.authenticate(uid=uid)
-    if user is not None:
-        auth.login(request, user)
+    auth.authenticate('bang!')
     return redirect('/')
 
 def send_login_email(request):
