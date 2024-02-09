@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import auth, messages
 
 def login(request):
-    auth.authenticate('bang!')
+    auth.authenticate(uid=request.GET.get('token'))
     return redirect('/')
 
 def send_login_email(request):
