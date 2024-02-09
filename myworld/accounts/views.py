@@ -10,7 +10,8 @@ from django.contrib import auth, messages
 
 def login(request):
     user = auth.authenticate(uid=request.GET.get('token'))
-    auth.login(request, user)
+    if user:
+        auth.login(request, user)
     return redirect('/')
 
 def send_login_email(request):
