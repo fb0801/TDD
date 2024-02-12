@@ -20,17 +20,17 @@ class FunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def wait(fn):  
-        def modified_fn():  
+    def wait(fn):
+        def modified_fn(*args, **kwargs):  
             start_time = time.time()
-            while True:  
+            while True:
                 try:
-                    return fn()  
-                except (AssertionError, WebDriverException) as e:  
+                    return fn(*args, **kwargs)  
+                except (AssertionError, WebDriverException) as e:
                     if time.time() - start_time > MAX_WAIT:
                         raise e
                     time.sleep(0.5)
-        return modified_fn  
+        return modified_fn 
 
     
     @wait
