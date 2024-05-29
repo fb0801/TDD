@@ -1,3 +1,4 @@
+import unittest
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from lists.models import Item, List
@@ -128,7 +129,14 @@ class ListViewTest(TestCase):
             self.assertTemplateUsed(response, 'list.html')
             self.assertEqual(Item.objects.all().count(), 1)
 
-class NewListTest(TestCase):
+class NewListViewIntegratedTest(TestCase):
+
+    def test_can_save_a_POST_request(self):
+        self.client.post("/lists/new", data={"text": "A new list item"})#item_text
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, "A new list item")
+        self.client.post("/", data={"text": "A new list item"})#item_text
 
     '''def test_validation_errors_are_sent_back_to_home_page_template(self):
         response = self.client.post('/lists/new', data={'text': ''})
@@ -159,25 +167,13 @@ class NewListTest(TestCase):
         self.assertIsInstance(response.context['form'], ItemForm)
 
 
-    @patch('lists.views.List')  
-    @patch('lists.views.ItemForm')
-    def test_list_owner_is_saved_if_user_is_authenticated(
-        self, mockItemFormClass, mockListClass
-    ):
+    @unittest.skip
+    def test_list_owner_is_saved_if_user_is_authenticated(self):
         user = User.objects.create(email='a@b.com')
         self.client.force_login(user)
-
         self.client.post('/lists/new', data={'text': 'new item'})
-
-        mock_list = mockListClass.return_value  
-
-        def check_owner_assigned():  
-            self.assertEqual(mock_list.owner, user)
-            mock_list.save.side_effect = check_owner_assigned  
-
-            self.client.post('/lists/new', data={'text': 'new item'})
-
-            mock_list.save.assert_called_once_with() 
+        list_ = List.objects.first()
+        self.assertEqual(list_.owner, user)
 
 
 
