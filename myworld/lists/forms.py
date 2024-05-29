@@ -31,6 +31,8 @@ class ItemForm(forms.models.ModelForm):
         }
 
         
+class NewListForm(object):
+    pass
 
 class ExistingListItemForm(ItemForm):
 
