@@ -37,7 +37,8 @@ def new_list(request):
         return render(request, 'home.html', {"form": form})
 
 def new_list2(request):
-    NewListForm(data=request.POST)
+    form = NewListForm(data=request.POST)
+    form.save(owner=request.user)
 
 def my_lists(request, email):
     owner = User.objects.get(email=email)
