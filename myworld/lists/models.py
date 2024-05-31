@@ -12,6 +12,9 @@ class List(models.Model):
     @property
     def name(self):
         return self.item_set.first().text
+    
+    def create_new():
+        pass
 
 
 class Item(models.Model):

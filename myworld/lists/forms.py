@@ -1,6 +1,6 @@
 from django import forms
 
-from lists.models import Item
+from lists.models import Item, List
 
 from django.core.exceptions import ValidationError
 
@@ -31,8 +31,13 @@ class ItemForm(forms.models.ModelForm):
         }
 
         
-class NewListForm(object):
-    pass
+class NewListForm(ItemForm):
+
+    def save(self, owner):
+        if owner.is_authenticated:
+            List.create_new(first_item_text=self.cleaned_data['text'], owner=owner)
+        else:
+            List.create_new(first_item_text=self.cleaned_data['text'])
 
 class ExistingListItemForm(ItemForm):
 
