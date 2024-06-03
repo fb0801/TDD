@@ -209,7 +209,7 @@ class NewListViewUnitTest(unittest.TestCase):
 
     def test_saves_form_with_owner_if_form_valid(self, mockNewListForm):
         mock_form = mockNewListForm.return_value
-        mock_form.is_valid.return_value = True
+        mock_form.is_valid.return_value = True  
         new_list2(self.request)
         mock_form.save.assert_called_once_with(owner=self.request.user)
 
