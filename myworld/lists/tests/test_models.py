@@ -69,6 +69,9 @@ class ListModelsTest(TestCase):
             item.save()
             item.full_clean()
 
+    def test_create_returns_new_list_object(self):
+        self.fail()
+
 class List(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
