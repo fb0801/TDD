@@ -70,7 +70,9 @@ class ListModelsTest(TestCase):
             item.full_clean()
 
     def test_create_returns_new_list_object(self):
-        self.fail()
+        returned = List.create_new(first_item_text='new item text')
+        new_list = List.objects.first()
+        self.assertEqual(returned, new_list)
 
 class List(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
