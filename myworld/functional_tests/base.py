@@ -5,8 +5,10 @@ from selenium.common.exceptions import WebDriverException
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from pathlib import Path
+from datetime import datetime
 
-
+SCREEN_DUMP_LOCATION = Path(__file__).absolute().parent / "screendumps"
 MAX_WAIT = 10
 
 class FunctionalTest(StaticLiveServerTestCase):
@@ -18,7 +20,17 @@ class FunctionalTest(StaticLiveServerTestCase):
             self.live_server_url = 'http://' + staging_server 
 
     def tearDown(self):
+        if self._test_has_failed():
+            if not SCREEN_DUMP_LOCATION.exists():
+                SCREEN_DUMP_LOCATION.mkdir(parents=True)
+            self.take_screenshot()
+            self.dump_html()
         self.browser.quit()
+        super().tearDown()
+
+    def _test_has_failed(self):
+        # slightly obscure but couldn't find a better way!
+        return self._outcome.result.failures or self._outcome.result.errors
 
     def wait(fn):
         def modified_fn(*args, **kwargs):  
@@ -32,6 +44,20 @@ class FunctionalTest(StaticLiveServerTestCase):
                     time.sleep(0.5)
         return modified_fn 
 
+    def create_pre_authenticated_session(self, email):
+        user = User.objects.create(email=email)
+        session = SessionStore()
+        session[SESSION_KEY] = user.pk 
+        session[BACKEND_SESSION_KEY] = settings.AUTHENTICATION_BACKENDS[0]
+        session.save()
+        ## to set a cookie we need to first visit the domain.
+        ## 404 pages load the quickest!
+        self.browser.get(self.live_server_url + "/404_no_such_url/")
+        self.browser.add_cookie(dict(
+            name=settings.SESSION_COOKIE_NAME,
+            value=session.session_key, 
+            path='/',
+        ))
     
     @wait
     def wait_for_row_in_list_table(self, row_text):
@@ -64,7 +90,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.assertIn(email, navbar.text)
 
     def wait_to_be_logged_in(self, email):
-        self.browser.find_element_by_link_text('Log out')
+        self.browser.find_element(By.LINK_TEXT,'Log out')
 
     @wait
     def wait_to_be_logged_out(self, email):
@@ -80,3 +106,22 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.get_item_input_box().send_keys(Keys.ENTER)
         item_number = num_rows + 1
         self.wait_for_row_in_list_table(f'{item_number}: {item_text}')
+
+
+    def take_screenshot(self):
+        path = SCREEN_DUMP_LOCATION / self._get_filename("png")
+        print("screenshotting to", path)
+        self.browser.get_screenshot_as_file(str(path))
+
+    def dump_html(self):
+        path = SCREEN_DUMP_LOCATION / self._get_filename("html")
+        print("dumping page HTML to", path)
+        path.write_text(self.browser.page_source)
+
+    def _get_filename(self, extension):
+        timestamp = datetime.now().isoformat().replace(":", ".")[:19]
+        return (
+            f"{self.__class__.__name__}.{self._testMethodName}-{timestamp}.{extension}"
+        )
+    
+    
