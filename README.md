@@ -18,6 +18,8 @@ Project to learn TDD with python
 
 - No module named 'django.core.urlresolvers' -> resoloved using from django.urls import reverse
 
+- chapter 18, c15
+
 # Resouces used:
 
 http://www.obeythetestinggoat.com/
